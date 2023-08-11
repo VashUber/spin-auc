@@ -4,11 +4,13 @@ import { observer } from 'mobx-react-lite'
 import { useEffect, useRef, useState } from 'react'
 import { lotsStore } from '~/store'
 
-const colors = ['red', 'green', 'blue', 'orange']
+let colors = ['red', 'green', 'blue', 'orange']
 
 export const Circle = observer(() => {
   const [key, setKey] = useState('')
   const [value, setValue] = useState(0)
+
+  const colorMap: Record<string, string> = {}
 
   const canvasRef = useRef<HTMLCanvasElement>(null!)
 
@@ -20,11 +22,26 @@ export const Circle = observer(() => {
       const centerY = canvasRef.current.height / 2
       const radius = centerX
 
-      ctx.beginPath()
-      ctx.moveTo(centerX, centerY)
-      ctx.arc(centerX, centerY, radius, 0, Math.PI / 2)
-      ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)]
-      ctx.fill()
+      let prev = 0
+
+      for (const [key, value] of lotsStore.lots) {
+        ctx.beginPath()
+        ctx.moveTo(centerX, centerY)
+
+        const curr = (Math.PI * 2 * value) / lotsStore.bank
+        ctx.arc(centerX, centerY, radius, prev, prev + curr)
+        prev += curr
+
+        if (!colorMap[key]) {
+          const color = colors[Math.floor(Math.random() * colors.length)]
+          colors = colors.filter((_c) => _c !== color)
+          colorMap[key] = color
+        }
+
+        ctx.fillStyle = colorMap[key] ?? 'black'
+        ctx.fill()
+        ctx.closePath()
+      }
     })
   }, [])
 
