@@ -15,30 +15,16 @@ export const Circle = observer(() => {
   useEffect(() => {
     autorun(() => {
       const ctx = canvasRef.current.getContext('2d')!
-      ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
 
       const centerX = canvasRef.current.width / 2
       const centerY = canvasRef.current.height / 2
+      const radius = centerX
 
       ctx.beginPath()
-      ctx.arc(centerX, centerY, centerX, 0, Math.PI * 2)
-      ctx.fill()
-
+      ctx.moveTo(centerX, centerY)
+      ctx.arc(centerX, centerY, radius, 0, Math.PI / 2)
       ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)]
-      ctx.beginPath()
-      ctx.arc(centerX, centerY, centerX, 0, Math.PI / 4)
-      ctx.moveTo(0, 0)
-
-      const x = centerX + Math.cos(Math.PI / 4) * centerX
-      const y = centerY + Math.sin(Math.PI / 4) * centerX
-
-      ctx.arc(x, y, 5, 0, Math.PI * 2)
-
-      // ctx.lineTo(centerX, centerY)
-      // ctx.lineTo(canvasRef.current.width, centerY)
       ctx.fill()
-
-      ctx.moveTo(0, 0)
     })
   }, [])
 
