@@ -1,4 +1,4 @@
-import { action, autorun, makeObservable, observable } from 'mobx'
+import { action, makeObservable, observable } from 'mobx'
 
 class LotsStore {
   lots = new Map<string, number>()
@@ -38,6 +38,3 @@ class LotsStore {
 }
 
 export const lotsStore = new LotsStore()
-autorun(() => {
-  console.log(lotsStore.bank)
-})

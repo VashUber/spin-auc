@@ -1,49 +1,28 @@
-'use client'
-import { autorun } from 'mobx'
-import { observer } from 'mobx-react-lite'
-import { useEffect, useRef, useState } from 'react'
-import { lotsStore } from '~/store'
-
-let colors = ['red', 'green', 'blue', 'orange']
+'use client';
+import { autorun } from 'mobx';
+import { observer } from 'mobx-react-lite';
+import { useEffect, useRef, useState } from 'react';
+import { lotsStore } from '~/store';
+import { drawCircle } from '~/utils/drawCircle';
 
 export const Circle = observer(() => {
-  const [key, setKey] = useState('')
-  const [value, setValue] = useState(0)
+  const [key, setKey] = useState('');
+  const [value, setValue] = useState(0);
 
-  const colorMap: Record<string, string> = {}
+  const colorMap = useRef<Record<string, string>>({});
 
-  const canvasRef = useRef<HTMLCanvasElement>(null!)
+  const canvasRef = useRef<HTMLCanvasElement>(null!);
 
   useEffect(() => {
     autorun(() => {
-      const ctx = canvasRef.current.getContext('2d')!
-
-      const centerX = canvasRef.current.width / 2
-      const centerY = canvasRef.current.height / 2
-      const radius = centerX
-
-      let prev = 0
-
-      for (const [key, value] of lotsStore.lots) {
-        ctx.beginPath()
-        ctx.moveTo(centerX, centerY)
-
-        const curr = (Math.PI * 2 * value) / lotsStore.bank
-        ctx.arc(centerX, centerY, radius, prev, prev + curr)
-        prev += curr
-
-        if (!colorMap[key]) {
-          const color = colors[Math.floor(Math.random() * colors.length)]
-          colors = colors.filter((_c) => _c !== color)
-          colorMap[key] = color
-        }
-
-        ctx.fillStyle = colorMap[key] ?? 'black'
-        ctx.fill()
-        ctx.closePath()
-      }
-    })
-  }, [])
+      drawCircle(
+        canvasRef.current,
+        colorMap.current,
+        lotsStore.lots,
+        lotsStore.bank
+      );
+    });
+  }, []);
 
   return (
     <div>
@@ -51,13 +30,13 @@ export const Circle = observer(() => {
         type="text"
         value={key}
         onChange={(e) => setKey(e.target.value)}
-        className="border-red-300 border"
+        className="input input-bordered w-full max-w-xs"
       />
       <input
         type="text"
         value={value === 0 ? '' : value}
         onChange={(e) => setValue(+e.target.value)}
-        className="border-red-300 border"
+        className="input input-bordered w-full max-w-xs"
       />
 
       <button onClick={() => lotsStore.addLot({ key, value })}>
@@ -71,7 +50,12 @@ export const Circle = observer(() => {
         </div>
       ))}
 
-      <canvas ref={canvasRef} width={500} height={500}></canvas>
+      <canvas
+        ref={canvasRef}
+        width={500}
+        height={500}
+        //className="animate-spin"
+      ></canvas>
     </div>
-  )
-})
+  );
+});
