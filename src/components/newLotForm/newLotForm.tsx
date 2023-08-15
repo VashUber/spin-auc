@@ -16,7 +16,7 @@ export const NewLotForm = () => {
   };
 
   return (
-    <form className="flex flex-col gap-4 py-2" onSubmit={onFormSubmit}>
+    <form className="flex flex-col gap-2" onSubmit={onFormSubmit}>
       <input
         type="text"
         placeholder="Название лота"

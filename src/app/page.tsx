@@ -12,7 +12,7 @@ const Home = observer(function () {
   const degreeMap = useRef<Record<string, number>>({});
   const canvasRef = useRef<HTMLCanvasElement>(null!);
   const [isRotating, setIsRotation] = useState(false);
-  const [winnerDegree, setWinnerDegree] = useState(0);
+  const [winnerDegree, setWinnerDegree] = useState(-1);
   const [spinTime, setSpinTime] = useState('20');
 
   const runSpinner = () => {
@@ -20,9 +20,13 @@ const Home = observer(function () {
 
     setIsRotation(true);
     const key = lotsStore.getWinner()!;
-    console.log(key);
     const degree = degreeMap.current[key];
     setWinnerDegree(degree);
+
+    setTimeout(() => {
+      setIsRotation(false);
+      setWinnerDegree(-1);
+    }, Number(spinTime) * 1000);
   };
 
   useEffect(() => {
@@ -38,10 +42,10 @@ const Home = observer(function () {
   }, []);
 
   return (
-    <div>
+    <div className="flex flex-col gap-4 py-4">
       <NewLotForm />
 
-      <div className="flex justify-between px-20">
+      <div className="flex justify-between">
         <LotsList />
 
         <div className="flex flex-col gap-2 items-center">

@@ -35,7 +35,7 @@ export const Circle = forwardRef(
 
     return (
       <div className="flex flex-col items-center overflow-hidden py-2">
-        <div className="w-0 h-0 border-l-transparent border-l-[20px] border-r-transparent border-r-[20px] border-t-[30px] border-t-gray-600" />
+        <div className="w-0 h-0 border-l-transparent border-l-[20px] border-r-transparent border-r-[20px] border-t-[30px] border-neutral" />
 
         <StyleSheetManager
           shouldForwardProp={(prop) =>
@@ -44,7 +44,7 @@ export const Circle = forwardRef(
           <StyledCanvas
             isRotating={isRotating}
             spinTime={spinTime}
-            degree={degree + 360 * (Math.floor(spinTime / 1) + 2)}
+            degree={degree + 360 * (Math.floor(spinTime) + 2)}
             ref={ref}
             width={500}
             height={500}
