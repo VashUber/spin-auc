@@ -16,15 +16,17 @@ export const NewLotForm = () => {
   };
 
   return (
-    <form className="flex flex-col gap-2" onSubmit={onFormSubmit}>
+    <form className="flex flex-col gap-4 py-2" onSubmit={onFormSubmit}>
       <input
         type="text"
+        placeholder="Название лота"
         className="input input-bordered"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
       <input
         type="text"
+        placeholder="Сумма лота"
         className="input input-bordered"
         value={value}
         onChange={(e) => {
@@ -37,7 +39,7 @@ export const NewLotForm = () => {
           setValue(inputValue);
         }}
       />
-      <button className="btn btn-info max-w-max">Add lot</button>
+      <button className="btn btn-info max-w-max">Добавить лот</button>
     </form>
   );
 };

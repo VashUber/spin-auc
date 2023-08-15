@@ -46,7 +46,7 @@ export const drawCircle = (
     degreeMap[key] = 270 - randomAngle * (180 / Math.PI);
 
     // предыдущая версия скролит всегда до центра, сейчас в рандомную область
-    //degreeMap[key] = 270 - (prev + curr / 2) * (180 / Math.PI);
+    // degreeMap[key] = 270 - (prev + curr / 2) * (180 / Math.PI);
 
     ctx.font = '22px Helvetica';
     ctx.fillStyle = 'white';

@@ -1,6 +1,6 @@
 'use client';
 
-import { Ref, forwardRef, useState } from 'react';
+import { Ref, forwardRef } from 'react';
 import styled, { StyleSheetManager, css, keyframes } from 'styled-components';
 
 const rotate = (degree: number) => keyframes`
@@ -28,29 +28,13 @@ const StyledCanvas = styled.canvas<{
 
 export const Circle = forwardRef(
   (
-    props: { isRotating: boolean; degree: number },
+    props: { isRotating: boolean; degree: number; spinTime: number },
     ref: Ref<HTMLCanvasElement>
   ) => {
-    const [spinTime, setSpinTime] = useState('20');
-    const { isRotating, degree } = props;
+    const { isRotating, degree, spinTime } = props;
 
     return (
-      <div className="flex flex-col items-center">
-        <input
-          type="text"
-          className="input input-bordered mb-2"
-          value={spinTime}
-          onChange={(e) => {
-            const inputValue = e.target.value;
-
-            if (inputValue.length && !Number(inputValue)) {
-              return;
-            }
-
-            setSpinTime(inputValue);
-          }}
-        />
-
+      <div className="flex flex-col items-center overflow-hidden py-2">
         <div className="w-0 h-0 border-l-transparent border-l-[20px] border-r-transparent border-r-[20px] border-t-[30px] border-t-gray-600" />
 
         <StyleSheetManager
@@ -59,11 +43,11 @@ export const Circle = forwardRef(
           }>
           <StyledCanvas
             isRotating={isRotating}
-            spinTime={Number(spinTime)}
-            degree={degree + 360 * (Math.floor(Number(spinTime) / 1) + 2)}
+            spinTime={spinTime}
+            degree={degree + 360 * (Math.floor(spinTime / 1) + 2)}
             ref={ref}
-            width={400}
-            height={400}
+            width={500}
+            height={500}
           />
         </StyleSheetManager>
       </div>

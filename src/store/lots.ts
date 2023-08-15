@@ -3,11 +3,13 @@ import { action, makeObservable, observable } from 'mobx';
 class LotsStore {
   lots = new Map<string, number>();
   bank = 0;
+  max = 0;
 
   constructor() {
     makeObservable(this, {
       lots: observable,
       bank: observable,
+      max: observable,
       addLot: action.bound
     });
   }
@@ -32,6 +34,9 @@ class LotsStore {
   }
 
   addLot({ key, value }: { key: string; value: number }) {
+    if (this.max < value) {
+      this.max = value;
+    }
     this.bank += value;
     this.lots.set(key, (this.lots.get(key) ?? 0) + value);
   }

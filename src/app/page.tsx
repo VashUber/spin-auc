@@ -3,7 +3,7 @@
 import { autorun } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import { useEffect, useRef, useState } from 'react';
-import { Circle, NewLotForm } from '~/components';
+import { BankStat, Circle, LotsList, NewLotForm } from '~/components';
 import { lotsStore } from '~/store';
 import { drawCircle } from '~/utils/drawCircle';
 
@@ -13,6 +13,7 @@ const Home = observer(function () {
   const canvasRef = useRef<HTMLCanvasElement>(null!);
   const [isRotating, setIsRotation] = useState(false);
   const [winnerDegree, setWinnerDegree] = useState(0);
+  const [spinTime, setSpinTime] = useState('20');
 
   const runSpinner = () => {
     if (lotsStore.lots.size === 0) return;
@@ -40,30 +41,40 @@ const Home = observer(function () {
     <div>
       <NewLotForm />
 
-      {JSON.stringify(degreeMap.current)}
+      <div className="flex justify-between px-20">
+        <LotsList />
 
-      <div className="flex justify-between px-48">
-        <div>
-          {Array.from(lotsStore.lots.entries()).map((e) => (
-            <div key={e[0]} className="flex gap-2">
-              <div>{e[0]}</div>
-              <div>{e[1]}</div>
-            </div>
-          ))}
-        </div>
+        <div className="flex flex-col gap-2 items-center">
+          <div className="flex gap-2">
+            <input
+              type="text"
+              className="input input-bordered mb-2"
+              placeholder="Время прокрутки"
+              value={spinTime}
+              onChange={(e) => {
+                const inputValue = e.target.value;
 
-        <div className="flex flex-col gap-4">
+                if (inputValue.length && !Number(inputValue)) {
+                  return;
+                }
+
+                setSpinTime(inputValue);
+              }}
+            />
+            <button className="btn btn-info max-w-max" onClick={runSpinner}>
+              Крутить
+            </button>
+          </div>
           <Circle
             ref={canvasRef}
             isRotating={isRotating}
             degree={winnerDegree}
+            spinTime={Number(spinTime)}
           />
-
-          <button className="btn btn-info max-w-max" onClick={runSpinner}>
-            Run
-          </button>
         </div>
       </div>
+
+      <BankStat />
     </div>
   );
 });
