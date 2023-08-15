@@ -1,6 +1,6 @@
 'use client';
 
-import { Ref, forwardRef } from 'react';
+import { Ref, forwardRef, useEffect, useRef } from 'react';
 import styled, { StyleSheetManager, css, keyframes } from 'styled-components';
 
 const rotate = (degree: number) => keyframes`
@@ -32,6 +32,12 @@ export const Circle = forwardRef(
     ref: Ref<HTMLCanvasElement>
   ) => {
     const { isRotating, degree, spinTime } = props;
+    const prevDegree = useRef(0);
+
+    useEffect(() => {
+      prevDegree.current = degree;
+      console.log(degree);
+    }, [degree]);
 
     return (
       <div className="flex flex-col items-center overflow-hidden py-2">
@@ -45,6 +51,9 @@ export const Circle = forwardRef(
             isRotating={isRotating}
             spinTime={spinTime}
             degree={degree + 360 * (Math.floor(spinTime) + 2)}
+            style={{
+              transform: `rotate(${prevDegree.current}deg)`
+            }}
             ref={ref}
             width={500}
             height={500}

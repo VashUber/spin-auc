@@ -3,4 +3,5 @@ export { Circle } from '~/components/circle';
 export { Lot } from '~/components/lot';
 export { LotsList } from '~/components/lotsList';
 export { NewLotForm } from '~/components/newLotForm';
+export { Spin } from '~/components/spin';
 export { WinnerDialog } from '~/components/winnerDialog';

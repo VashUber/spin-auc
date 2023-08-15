@@ -39,19 +39,21 @@ export const drawCircle = (
     ctx.stroke();
     ctx.save();
 
-    const textX = centerX + Math.cos(prev + curr / 2) * (radius - 150);
-    const textY = centerY + Math.sin(prev + curr / 2) * (radius - 150);
+    if (key.length < 20 && value / bank >= 1 / 6) {
+      const textX = centerX + Math.cos(prev + curr / 2) * (radius - 150);
+      const textY = centerY + Math.sin(prev + curr / 2) * (radius - 150);
+
+      ctx.font = '22px Helvetica';
+      ctx.fillStyle = 'white';
+      ctx.textAlign = 'center';
+      ctx.fillText(key, textX, textY);
+    }
 
     const randomAngle = Math.random() * curr + prev;
     degreeMap[key] = 270 - randomAngle * (180 / Math.PI);
-
     // предыдущая версия скролит всегда до центра, сейчас в рандомную область
     // degreeMap[key] = 270 - (prev + curr / 2) * (180 / Math.PI);
 
-    ctx.font = '22px Helvetica';
-    ctx.fillStyle = 'white';
-    ctx.textAlign = 'center';
-    ctx.fillText(key, textX, textY);
     ctx.restore();
     prev += curr;
   }

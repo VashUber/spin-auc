@@ -21,7 +21,7 @@ export const Lot = ({ title, total }: LotPropsI) => {
     <div className="w-full bg-neutral text-primary-content rounded-lg px-4 py-2">
       <div className="text-neutral-content flex gap-4 items-center justify-between">
         <div className="flex gap-2 items-center">
-          <h2 className="text-xl">{title}</h2>
+          <h2 className="text-xl truncate w-40">{title}</h2>
           <div>{total}₽</div>
         </div>
 
