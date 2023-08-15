@@ -21,7 +21,6 @@ export const drawCircle = (
   let prev = 0;
 
   for (const [key, value] of lots) {
-    ctx.save();
     ctx.beginPath();
     ctx.moveTo(centerX, centerY);
 
@@ -39,10 +38,10 @@ export const drawCircle = (
     ctx.stroke();
     ctx.save();
 
-    const textX = centerX + Math.cos(prev + curr / 2) * (radius - 50);
-    const textY = centerY + Math.sin(prev + curr / 2) * (radius - 50);
+    const textX = centerX + Math.cos(prev + curr / 2) * (radius - 150);
+    const textY = centerY + Math.sin(prev + curr / 2) * (radius - 150);
 
-    ctx.font = '28px serif';
+    ctx.font = '22px Helvetica';
     ctx.fillStyle = 'white';
     ctx.textAlign = 'center';
     ctx.fillText(key, textX, textY);
