@@ -29,7 +29,8 @@ export const NewLotForm = () => {
         value={value}
         onChange={(e) => {
           const inputValue = e.target.value;
-          if (!Number(inputValue)) {
+
+          if (inputValue.length && !Number(inputValue)) {
             return;
           }
 

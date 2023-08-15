@@ -3,6 +3,7 @@ import { randomColor } from './randomColor';
 export const drawCircle = (
   canvas: HTMLCanvasElement,
   colorMap: Record<string, string>,
+  degreeMap: Record<string, number>,
   lots: Map<string, number>,
   bank: number
 ) => {
@@ -40,6 +41,12 @@ export const drawCircle = (
 
     const textX = centerX + Math.cos(prev + curr / 2) * (radius - 150);
     const textY = centerY + Math.sin(prev + curr / 2) * (radius - 150);
+
+    const randomAngle = Math.random() * curr + prev;
+    degreeMap[key] = 270 - randomAngle * (180 / Math.PI);
+
+    // предыдущая версия скролит всегда до центра, сейчас в рандомную область
+    //degreeMap[key] = 270 - (prev + curr / 2) * (180 / Math.PI);
 
     ctx.font = '22px Helvetica';
     ctx.fillStyle = 'white';
