@@ -17,7 +17,7 @@ export const BankStat = observer(() => {
 
     window.addEventListener('scroll', onScroll);
 
-    return () => window.removeEventListener('scroll', onScroll);
+    return window.removeEventListener.bind(null, 'scroll', onScroll);
   }, []);
 
   return (

@@ -21,7 +21,7 @@ export const WinnerAnnouncement = (props: WinnerAnnouncementPropsI) => {
         </button>
       </div>
 
-      <Confetti width={window.innerWidth} height={document.body.offsetHeight} />
+      <Confetti width={window.innerWidth} height={window.innerHeight} />
     </div>,
     document.getElementById('body')!
   );
