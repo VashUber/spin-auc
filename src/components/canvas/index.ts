@@ -1,0 +1,1 @@
+export { StyledCanvas } from './canvas';
