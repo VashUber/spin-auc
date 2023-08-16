@@ -1,5 +1,3 @@
-'use client';
-
 import { Ref, forwardRef, useEffect, useRef } from 'react';
 import styled, { StyleSheetManager, css, keyframes } from 'styled-components';
 
@@ -36,7 +34,6 @@ export const Circle = forwardRef(
 
     useEffect(() => {
       prevDegree.current = degree;
-      console.log(degree);
     }, [degree]);
 
     return (

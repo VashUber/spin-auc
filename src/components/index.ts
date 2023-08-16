@@ -4,4 +4,4 @@ export { Lot } from '~/components/lot';
 export { LotsList } from '~/components/lotsList';
 export { NewLotForm } from '~/components/newLotForm';
 export { Spin } from '~/components/spin';
-export { WinnerDialog } from '~/components/winnerDialog';
+export { WinnerAnnouncement } from '~/components/winnerAnnouncement';

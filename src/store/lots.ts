@@ -26,11 +26,20 @@ class LotsStore {
     return map;
   }
 
-  getWinner() {
+  getWinner(): [key: string, angle: number] {
     const random = Math.floor(Math.random() * this.bank) + 1;
+    let prevAngle = 0;
+
     for (let [k, v] of this.createRandomMap()) {
-      if (random >= v[0] && random <= v[1]) return k;
+      const currAngle = (Math.PI * 2 * this.lots.get(k)!) / this.bank;
+      const randomAngle = Math.random() * currAngle + prevAngle;
+      prevAngle += currAngle;
+
+      if (random >= v[0] && random <= v[1])
+        return [k, 270 - randomAngle * (180 / Math.PI)];
     }
+
+    return ['', 0];
   }
 
   addLot({ key, value }: { key: string; value: number }) {

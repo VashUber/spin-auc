@@ -1,9 +1,8 @@
 'use client';
 
-import { observer } from 'mobx-react-lite';
 import { BankStat, LotsList, NewLotForm, Spin } from '~/components';
 
-const Home = observer(function () {
+const Home = function () {
   return (
     <div className="flex flex-col gap-4 py-4">
       <NewLotForm />
@@ -17,6 +16,6 @@ const Home = observer(function () {
       <BankStat />
     </div>
   );
-});
+};
 
 export default Home;

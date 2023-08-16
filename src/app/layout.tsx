@@ -13,7 +13,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="max-w-screen-2xl my-0 mx-auto overflow-x-hidden px-4">
+      <body
+        className="max-w-screen-2xl my-0 mx-auto overflow-x-hidden px-4"
+        id="body">
         {children}
       </body>
     </html>
