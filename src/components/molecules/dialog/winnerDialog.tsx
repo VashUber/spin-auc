@@ -1,24 +1,21 @@
-'use client';
-
 import Confetti from 'react-confetti';
 import { createPortal } from 'react-dom';
+import { DefaultButton } from '~atoms';
 
-interface WinnerAnnouncementPropsI {
+interface WinnerDialogPropsI {
   winner: string;
   setWinner: (value: string) => void;
 }
 
-export const WinnerAnnouncement = (props: WinnerAnnouncementPropsI) => {
+export const WinnerDialog = (props: WinnerDialogPropsI) => {
   const { winner, setWinner } = props;
 
   return createPortal(
     <div className="w-screen h-screen fixed top-0 left-0 bg-neutral bg-opacity-50 flex items-center justify-center">
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 items-center">
         <span>Победил вариант - {winner}</span>
 
-        <button className="btn btn-info" onClick={() => setWinner('')}>
-          Ок
-        </button>
+        <DefaultButton onClick={() => setWinner('')}>Ок</DefaultButton>
       </div>
 
       <Confetti width={window.innerWidth} height={window.innerHeight} />

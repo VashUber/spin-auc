@@ -1,1 +1,0 @@
-export { LotsList } from './lotsLists';

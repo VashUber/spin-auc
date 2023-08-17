@@ -1,21 +1,7 @@
-'use client';
+import { Home } from '~pages';
 
-import { BankStat, LotsList, NewLotForm, Spin } from '~/components';
-
-const Home = function () {
-  return (
-    <div className="flex flex-col gap-4 py-4">
-      <NewLotForm />
-
-      <div className="flex justify-between">
-        <LotsList />
-
-        <Spin />
-      </div>
-
-      <BankStat />
-    </div>
-  );
+const HomePage = function () {
+  return <Home />;
 };
 
-export default Home;
+export default HomePage;

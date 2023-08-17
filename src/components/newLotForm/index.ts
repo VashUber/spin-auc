@@ -1,1 +1,0 @@
-export { NewLotForm } from './newLotForm';

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { DefaultTemplate } from '~templates';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -13,11 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body
-        className="max-w-screen-2xl my-0 mx-auto overflow-x-hidden px-4"
-        id="body">
-        {children}
-      </body>
+      <DefaultTemplate>{children}</DefaultTemplate>
     </html>
   );
 }

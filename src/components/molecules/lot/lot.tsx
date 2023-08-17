@@ -1,12 +1,13 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, memo, useState } from 'react';
 import { lotsStore } from '~/store';
+import { DefaultButton, NumberInput } from '~atoms';
 
 interface LotPropsI {
   title: string;
   total: number;
 }
 
-export const Lot = ({ title, total }: LotPropsI) => {
+export const Lot = memo(({ title, total }: LotPropsI) => {
   const [additionalValue, setAdditionalValue] = useState('');
 
   const addValue = (e: FormEvent<HTMLFormElement>) => {
@@ -26,24 +27,20 @@ export const Lot = ({ title, total }: LotPropsI) => {
         </div>
 
         <form onSubmit={addValue} className="flex gap-2 items-center">
-          <input
-            type="text"
+          <NumberInput
             placeholder="Добавить сумму"
-            className="input input-bordered w-40"
+            className="w-40"
             value={additionalValue}
-            onChange={(e) => {
-              const inputValue = e.target.value;
-
-              if (inputValue.length && !Number(inputValue)) {
-                return;
-              }
-
-              setAdditionalValue(inputValue);
-            }}
+            onChange={(e) => setAdditionalValue(e.target.value)}
           />
-          <button className="btn btn-info max-w-max">Добавить сумму</button>
+
+          <DefaultButton className="btn btn-info max-w-max">
+            Добавить сумму
+          </DefaultButton>
         </form>
       </div>
     </div>
   );
-};
+});
+
+Lot.displayName = 'Lot';

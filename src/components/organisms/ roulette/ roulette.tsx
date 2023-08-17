@@ -1,11 +1,12 @@
 import { autorun } from 'mobx';
 import { observer, useLocalObservable } from 'mobx-react-lite';
 import { useEffect, useRef } from 'react';
-import { Circle, WinnerAnnouncement } from '~/components';
 import { lotsStore } from '~/store';
 import { drawCircle } from '~/utils/drawCircle';
+import { DefaultButton, NumberInput } from '~atoms';
+import { Wheel, WinnerDialog } from '~molecules';
 
-export const Spin = observer(() => {
+export const Roulette = observer(() => {
   const colorMap = useRef<Record<string, string>>({});
   const canvasRef = useRef<HTMLCanvasElement>(null!);
 
@@ -59,34 +60,24 @@ export const Spin = observer(() => {
   return (
     <div className="flex flex-col gap-2 items-center">
       {spin.winner && (
-        <WinnerAnnouncement winner={spin.winner} setWinner={spin.setWinner} />
+        <WinnerDialog winner={spin.winner} setWinner={spin.setWinner} />
       )}
 
       <div className="flex gap-2">
-        <input
-          type="text"
+        <NumberInput
           disabled={spin.isRotating}
-          className="input input-bordered mb-2"
           placeholder="Время прокрутки"
           value={spin.spinTime}
-          onChange={(e) => {
-            const inputValue = e.target.value;
-
-            if (inputValue.length && !Number(inputValue)) {
-              return;
-            }
-
-            spin.setSpinTime(inputValue);
-          }}
+          onChange={(e) => spin.setSpinTime(e.target.value)}
         />
-        <button
+        <DefaultButton
           className="btn btn-info max-w-max"
           disabled={spin.isRotating}
           onClick={runSpinner}>
           Крутить
-        </button>
+        </DefaultButton>
       </div>
-      <Circle
+      <Wheel
         ref={canvasRef}
         isRotating={spin.isRotating}
         degree={spin.winnerDegree}

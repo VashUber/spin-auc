@@ -1,6 +1,6 @@
 import { forwardRef, useEffect, useRef } from 'react';
 import { StyleSheetManager } from 'styled-components';
-import { StyledCanvas } from '~/components';
+import { RotatingCanvas } from '~atoms';
 
 interface CirclePropsI {
   isRotating: boolean;
@@ -9,7 +9,7 @@ interface CirclePropsI {
 }
 type CircleRefT = HTMLCanvasElement;
 
-export const Circle = forwardRef<CircleRefT, CirclePropsI>((props, ref) => {
+export const Wheel = forwardRef<CircleRefT, CirclePropsI>((props, ref) => {
   const { isRotating, degree, spinTime } = props;
   const prevDegree = useRef(0);
 
@@ -22,7 +22,7 @@ export const Circle = forwardRef<CircleRefT, CirclePropsI>((props, ref) => {
       <div className="w-0 h-0 border-l-transparent border-l-[20px] border-r-transparent border-r-[20px] border-t-[30px] border-neutral" />
 
       <StyleSheetManager shouldForwardProp={(prop) => !prop.startsWith('$')}>
-        <StyledCanvas
+        <RotatingCanvas
           $isRotating={isRotating}
           $spinTime={spinTime}
           $degree={degree + 360 * (Math.floor(spinTime) + 2)}
@@ -38,4 +38,4 @@ export const Circle = forwardRef<CircleRefT, CirclePropsI>((props, ref) => {
   );
 });
 
-Circle.displayName = 'Circle';
+Wheel.displayName = 'Circle';

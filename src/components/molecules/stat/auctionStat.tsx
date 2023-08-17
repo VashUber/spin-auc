@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
 import { lotsStore } from '~/store';
 
-export const BankStat = observer(() => {
+export const AuctionStat = observer(() => {
   const [isTop, setIsTop] = useState(true);
 
   useEffect(() => {

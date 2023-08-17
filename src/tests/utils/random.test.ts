@@ -15,7 +15,7 @@ test('Testing random chances', () => {
   const count = 100 * 100 * 100 * 15;
 
   for (let i = 0; i < count; i++) {
-    keys[lotsStore.getWinner()! as keyof typeof keys]++;
+    keys[lotsStore.getWinner()[0] as keyof typeof keys]++;
   }
 
   expect(keys[1] / count).toBeCloseTo(0.12, 3);
