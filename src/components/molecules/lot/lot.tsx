@@ -28,7 +28,7 @@ export const Lot = memo(({ title, total }: LotPropsI) => {
 
         <form onSubmit={addValue} className="flex gap-2 items-center">
           <NumberInput
-            placeholder="Добавить сумму"
+            placeholder="Сумма"
             className="w-40"
             value={additionalValue}
             onChange={(e) => setAdditionalValue(e.target.value)}
