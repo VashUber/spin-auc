@@ -37,7 +37,7 @@ export const drawCircle = (
     ctx.lineWidth = 2;
     ctx.stroke();
 
-    if (value / bank >= 1 / 18) {
+    if (value / bank >= 1 / 25) {
       let text = key;
       if (text.length >= 18) {
         text = text.slice(0, 18) + '...';
