@@ -13,10 +13,12 @@ export const drawCircle = (
   const centerY = canvas.height / 2;
   const radius = centerX - 10;
 
+  ctx.beginPath();
   ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
   ctx.strokeStyle = '#fff';
   ctx.lineWidth = 4;
   ctx.stroke();
+  ctx.closePath();
 
   let prev = 0;
 
@@ -33,9 +35,9 @@ export const drawCircle = (
 
     ctx.fillStyle = colorMap[key];
     ctx.fill();
-    ctx.closePath();
     ctx.lineWidth = 2;
     ctx.stroke();
+    ctx.closePath();
 
     if (value / bank >= 1 / 25) {
       let text = key;
@@ -60,4 +62,10 @@ export const drawCircle = (
     ctx.restore();
     prev += curr;
   }
+
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, 10, 0, Math.PI * 2);
+  ctx.fillStyle = '#fff';
+  ctx.fill();
+  ctx.closePath();
 };

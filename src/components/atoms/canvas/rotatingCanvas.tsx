@@ -17,7 +17,7 @@ const rotate = (degree: number) => keyframes`
 `;
 
 const style = (degree: number, spinTime: number) => css`
-  ${rotate(degree)} ${spinTime}s cubic-bezier(0.36, 0.8, 0.4, 1) forwards
+  ${rotate(degree)} ${spinTime}s cubic-bezier(0.2, 0.75, 0.15, 1) forwards
 `;
 
 export const RotatingCanvas = styled.canvas<CanvasPropsI>`

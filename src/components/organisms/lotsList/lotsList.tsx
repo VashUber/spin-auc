@@ -11,6 +11,7 @@ export const LotsList = observer(() => {
           title={e[0]}
           total={e[1]}
           deleteLot={lotsStore.deleteLot}
+          addValueToLot={lotsStore.addLot}
         />
       ))}
     </div>
