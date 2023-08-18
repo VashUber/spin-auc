@@ -19,7 +19,7 @@ export const Wheel = forwardRef<CircleRefT, CirclePropsI>((props, ref) => {
 
   return (
     <div className="flex flex-col items-center overflow-hidden py-2">
-      <div className="w-0 h-0 border-l-transparent border-l-[20px] border-r-transparent border-r-[20px] border-t-[30px] border-neutral" />
+      <div className="h-0 w-0 border-l-[20px] border-r-[20px] border-t-[30px] border-neutral border-l-transparent border-r-transparent" />
 
       <StyleSheetManager shouldForwardProp={(prop) => !prop.startsWith('$')}>
         <RotatingCanvas

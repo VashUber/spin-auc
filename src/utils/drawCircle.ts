@@ -36,16 +36,25 @@ export const drawCircle = (
     ctx.closePath();
     ctx.lineWidth = 2;
     ctx.stroke();
-    ctx.save();
 
-    if (key.length < 20 && value / bank >= 1 / 6) {
-      const textX = centerX + Math.cos(prev + curr / 2) * (radius - 150);
-      const textY = centerY + Math.sin(prev + curr / 2) * (radius - 150);
+    if (value / bank >= 1 / 18) {
+      let text = key;
+      if (text.length >= 18) {
+        text = text.slice(0, 18) + '...';
+      }
 
-      ctx.font = '22px Helvetica';
+      ctx.save();
+      const textX = centerX + Math.cos(prev + curr / 2) * (radius - 200);
+      const textY = centerY + Math.sin(prev + curr / 2) * (radius - 200);
+
+      ctx.font = '18px Helvetica';
       ctx.fillStyle = 'white';
-      ctx.textAlign = 'center';
-      ctx.fillText(key, textX, textY);
+      ctx.textAlign = 'start';
+      ctx.textBaseline = 'middle';
+      ctx.translate(textX, textY);
+      ctx.rotate(prev + curr / 2);
+      ctx.translate(-textX, -textY);
+      ctx.fillText(text, textX, textY);
     }
 
     ctx.restore();

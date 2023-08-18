@@ -7,7 +7,7 @@ interface DefaultTemplatePropsI {
 export const DefaultTemplate = ({ children }: DefaultTemplatePropsI) => {
   return (
     <body
-      className="max-w-screen-2xl my-0 mx-auto overflow-x-hidden px-4"
+      className="mx-auto my-0 max-w-screen-2xl overflow-x-hidden px-4"
       id="body">
       {children}
     </body>

@@ -1,4 +1,4 @@
-import { enableStaticRendering } from 'mobx-react-lite'
-export { lotsStore } from './lots'
+import { enableStaticRendering } from 'mobx-react-lite';
+export { lotsStore } from './lots';
 
-enableStaticRendering(typeof window === 'undefined')
+enableStaticRendering(typeof window === 'undefined');

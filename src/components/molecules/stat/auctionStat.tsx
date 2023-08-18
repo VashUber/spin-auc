@@ -22,7 +22,7 @@ export const AuctionStat = observer(() => {
 
   return (
     <div
-      className={`stats shadow fixed left-0 ${isTop ? 'bottom-0' : 'top-0'}`}>
+      className={`stats fixed left-0 shadow ${isTop ? 'bottom-0' : 'top-0'}`}>
       <div className="stat">
         <div className="stat-title">Общая сумма</div>
         <div className="stat-value">{lotsStore.bank}₽</div>
