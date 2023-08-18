@@ -10,7 +10,8 @@ class LotsStore {
       lots: observable,
       bank: observable,
       max: observable,
-      addLot: action.bound
+      addLot: action.bound,
+      deleteLot: action.bound
     });
   }
 
@@ -50,6 +51,12 @@ class LotsStore {
     }
     this.bank += value;
     this.lots.set(key, (this.lots.get(key) ?? 0) + value);
+  }
+
+  deleteLot(key: string) {
+    const value = this.lots.get(key)!;
+    this.lots.delete(key);
+    this.bank -= value;
   }
 }
 

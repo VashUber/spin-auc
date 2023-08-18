@@ -1,13 +1,14 @@
 import { FormEvent, memo, useState } from 'react';
 import { lotsStore } from '~/store';
-import { DefaultButton, NumberInput } from '~atoms';
+import { CircleButton, DefaultButton, NumberInput } from '~atoms';
 
 interface LotPropsI {
   title: string;
   total: number;
+  deleteLot: (key: string) => void;
 }
 
-export const Lot = memo(({ title, total }: LotPropsI) => {
+export const Lot = memo(({ title, total, deleteLot }: LotPropsI) => {
   const [additionalValue, setAdditionalValue] = useState('');
 
   const addValue = (e: FormEvent<HTMLFormElement>) => {
@@ -19,14 +20,14 @@ export const Lot = memo(({ title, total }: LotPropsI) => {
   };
 
   return (
-    <div className="w-full bg-neutral text-primary-content rounded-lg px-4 py-2">
-      <div className="text-neutral-content flex gap-4 items-center justify-between">
-        <div className="flex gap-2 items-center">
-          <h2 className="text-xl truncate w-40">{title}</h2>
+    <div className="group relative w-full rounded-lg bg-neutral px-4 py-2 text-primary-content">
+      <div className="flex items-center justify-between gap-4 text-neutral-content">
+        <div className="flex items-center gap-2">
+          <h2 className="w-40 truncate text-xl">{title}</h2>
           <div>{total}₽</div>
         </div>
 
-        <form onSubmit={addValue} className="flex gap-2 items-center">
+        <form onSubmit={addValue} className="flex items-center gap-2">
           <NumberInput
             placeholder="Сумма"
             className="w-40"
@@ -34,11 +35,15 @@ export const Lot = memo(({ title, total }: LotPropsI) => {
             onChange={(e) => setAdditionalValue(e.target.value)}
           />
 
-          <DefaultButton className="btn btn-info max-w-max">
-            Добавить сумму
-          </DefaultButton>
+          <DefaultButton className="max-w-max">Добавить сумму</DefaultButton>
         </form>
       </div>
+
+      <CircleButton
+        className="btn-error absolute -right-5 -top-5 hidden text-base-content group-hover:block"
+        onClick={() => deleteLot(title)}>
+        x
+      </CircleButton>
     </div>
   );
 });

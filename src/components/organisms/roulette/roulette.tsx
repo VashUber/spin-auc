@@ -37,11 +37,14 @@ export const Roulette = observer(() => {
     spin.setIsRotating(true);
     spin.setWinnerDegree(angle);
 
-    setTimeout(() => {
-      spin.setWinner(key);
-      spin.setWinnerDegree(0);
-      spin.setIsRotating(false);
-    }, Number(spin.spinTime) * 1000);
+    setTimeout(
+      () => {
+        spin.setWinner(key);
+        spin.setWinnerDegree(0);
+        spin.setIsRotating(false);
+      },
+      Number(spin.spinTime) * 1000
+    );
   };
 
   useEffect(() => {
@@ -58,7 +61,7 @@ export const Roulette = observer(() => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-2 items-center">
+    <div className="flex flex-col items-center gap-2">
       {spin.winner && (
         <WinnerDialog winner={spin.winner} setWinner={spin.setWinner} />
       )}

@@ -11,8 +11,8 @@ export const WinnerDialog = (props: WinnerDialogPropsI) => {
   const { winner, setWinner } = props;
 
   return createPortal(
-    <div className="w-screen h-screen fixed top-0 left-0 bg-neutral bg-opacity-50 flex items-center justify-center">
-      <div className="flex flex-col gap-2 items-center">
+    <div className="fixed left-0 top-0 flex h-screen w-screen items-center justify-center bg-neutral bg-opacity-50">
+      <div className="flex flex-col items-center gap-2">
         <span>Победил вариант - {winner}</span>
 
         <DefaultButton onClick={() => setWinner('')}>Ок</DefaultButton>
