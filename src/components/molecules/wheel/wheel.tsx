@@ -11,11 +11,6 @@ type CircleRefT = HTMLCanvasElement;
 
 export const Wheel = forwardRef<CircleRefT, CirclePropsI>((props, ref) => {
   const { isRotating, degree, spinTime } = props;
-  const prevDegree = useRef(0);
-
-  useEffect(() => {
-    prevDegree.current = degree;
-  }, [degree]);
 
   return (
     <div className="flex flex-col items-center overflow-hidden py-2">
@@ -26,9 +21,6 @@ export const Wheel = forwardRef<CircleRefT, CirclePropsI>((props, ref) => {
           $isRotating={isRotating}
           $spinTime={spinTime}
           $degree={degree + 360 * (Math.floor(spinTime) + 2)}
-          style={{
-            transform: `rotate(${prevDegree.current}deg)`
-          }}
           ref={ref}
           width={550}
           height={550}

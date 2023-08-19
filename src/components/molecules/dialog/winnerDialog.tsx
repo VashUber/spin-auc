@@ -4,18 +4,18 @@ import { DefaultButton } from '~atoms';
 
 interface WinnerDialogPropsI {
   winner: string;
-  setWinner: (value: string) => void;
+  resetWheel: Function;
 }
 
 export const WinnerDialog = (props: WinnerDialogPropsI) => {
-  const { winner, setWinner } = props;
+  const { winner, resetWheel } = props;
 
   return createPortal(
     <div className="fixed left-0 top-0 flex h-screen w-screen items-center justify-center bg-neutral bg-opacity-50">
       <div className="flex flex-col items-center gap-2">
         <span>Победил лот - {winner}</span>
 
-        <DefaultButton onClick={() => setWinner('')}>Ок</DefaultButton>
+        <DefaultButton onClick={() => resetWheel()}>Ок</DefaultButton>
       </div>
 
       <Confetti width={window.innerWidth} height={window.innerHeight} />

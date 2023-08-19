@@ -40,11 +40,15 @@ export const Roulette = observer(() => {
     setTimeout(
       () => {
         spin.setWinner(key);
-        spin.setWinnerDegree(0);
-        spin.setIsRotating(false);
       },
       Number(spin.spinTime) * 1000
     );
+  };
+
+  const resetWheel = () => {
+    spin.setWinner('');
+    spin.setWinnerDegree(0);
+    spin.setIsRotating(false);
   };
 
   useEffect(() => {
@@ -63,7 +67,7 @@ export const Roulette = observer(() => {
   return (
     <div className="flex flex-col items-center gap-2">
       {spin.winner && (
-        <WinnerDialog winner={spin.winner} setWinner={spin.setWinner} />
+        <WinnerDialog winner={spin.winner} resetWheel={resetWheel} />
       )}
 
       <div className="flex gap-2">
